@@ -1,0 +1,19 @@
+#https://www.kloia.com/blog/kafka-connect-elasticsearch-sink-connector
+#https://www.confluent.io/blog/kafka-elasticsearch-connector-tutorial/
+#https://sematext.com/blog/kafka-connect-elasticsearch-how-to/
+  elasticsearch:
+    container_name: elastic
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - cluster.routing.allocation.disk.threshold_enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
